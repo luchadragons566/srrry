@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>I'm Sorry ❤️</title>
+
+<style>
+    body {
+        background: linear-gradient(to right, #ff758c, #ff7eb3);
+        font-family: Arial, sans-serif;
+        text-align: center;
+        color: #333;
+        padding-top: 80px;
+        overflow: hidden;
+    }
+
+    .card {
+        background: white;
+        padding: 30px;
+        margin: auto;
+        width: 85%;
+        max-width: 420px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        position: relative;
+        z-index: 2;
+    }
+
+    h1 {
+        color: #ff4d6d;
+    }
+
+    #typing {
+        font-size: 16px;
+        margin-top: 20px;
+        min-height: 120px;
+        line-height: 1.6;
+    }
+
+    button {
+        background: #ff4d6d;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+
+    button:hover {
+        background: #e63950;
+    }
+
+    #finalMessage {
+        display: none;
+        margin-top: 20px;
+        font-size: 18px;
+        color: #ff4d6d;
+        animation: glow 1s infinite alternate;
+    }
+
+    @keyframes glow {
+        from { text-shadow: 0 0 5px #ff4d6d; }
+        to { text-shadow: 0 0 20px #ff4d6d; }
+    }
+
+    .heart {
+        position: absolute;
+        color: red;
+        font-size: 20px;
+        animation: floatUp 3s linear infinite;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0); opacity: 1; }
+        100% { transform: translateY(-600px); opacity: 0; }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Prasun, I’m Really Sorry 💔</h1>
+
+    <p id="typing"></p>
+
+    <button onclick="showSurprise()">Click Me</button>
+
+    <div id="finalMessage">
+        Prasun, I will earn your trust back, no matter what it takes ❤️
+    </div>
+</div>
+
+<script>
+const text = "Prasun, I know I broke your trust... and I understand how deeply that hurts. Even if I didn’t realize it at that moment, I take it seriously now. Your trust means everything to me.";
+
+let i = 0;
+
+function typeEffect() {
+    if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeEffect, 40);
+    }
+}
+
+function showSurprise() {
+    document.getElementById("finalMessage").style.display = "block";
+
+    // create floating hearts
+    for (let i = 0; i < 20; i++) {
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = "100%";
+        heart.style.fontSize = (15 + Math.random() * 20) + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 3000);
+    }
+}
+
+window.onload = typeEffect;
+</script>
+
+</body>
+</html>
