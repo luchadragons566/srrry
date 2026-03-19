@@ -3,82 +3,129 @@
 <head>
 <meta charset="UTF-8">
 <title>I'm Sorry ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-    body {
-        background: linear-gradient(to right, #ff758c, #ff7eb3);
-        font-family: Arial, sans-serif;
-        text-align: center;
-        color: #333;
-        padding-top: 80px;
-        overflow: hidden;
-    }
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #ff758c, #ff7eb3);
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+    text-align: center;
+    color: #333;
+}
 
-    .card {
-        background: white;
-        padding: 30px;
-        margin: auto;
-        width: 85%;
-        max-width: 420px;
-        border-radius: 15px;
-        box-shadow: 0 0 20px rgba(0,0,0,0.2);
-        position: relative;
-        z-index: 2;
-    }
+/* Card */
+.card {
+    background: white;
+    padding: 20px;
+    margin: 50px auto;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 2;
+}
 
-    h1 {
-        color: #ff4d6d;
-    }
+/* Header */
+h1 {
+    color: #ff4d6d;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
 
-    #typing {
-        font-size: 16px;
-        margin-top: 20px;
-        min-height: 120px;
-        line-height: 1.6;
-    }
+/* Typing text */
+#typing {
+    font-size: 1em;
+    min-height: 100px;
+    line-height: 1.5em;
+    word-wrap: break-word;
+    margin-top: 15px;
+}
 
-    button {
-        background: #ff4d6d;
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 10px;
-        cursor: pointer;
-        margin-top: 20px;
-    }
+/* Button */
+button {
+    background: #ff4d6d;
+    border: none;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 1em;
+}
 
-    button:hover {
-        background: #e63950;
-    }
+button:hover {
+    background: #e63950;
+}
 
-    #finalMessage {
-        display: none;
-        margin-top: 20px;
-        font-size: 18px;
-        color: #ff4d6d;
-        animation: glow 1s infinite alternate;
-    }
+/* Final message */
+#finalMessage {
+    display: none;
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #ff4d6d;
+    animation: glow 1s infinite alternate;
+    line-height: 1.5em;
+}
 
-    @keyframes glow {
-        from { text-shadow: 0 0 5px #ff4d6d; }
-        to { text-shadow: 0 0 20px #ff4d6d; }
-    }
+/* Glow effect */
+@keyframes glow {
+    from { text-shadow: 0 0 5px #ff4d6d; }
+    to { text-shadow: 0 0 20px #ff4d6d; }
+}
 
-    .heart {
-        position: absolute;
-        color: red;
-        font-size: 20px;
-        animation: floatUp 3s linear infinite;
-    }
+/* Hearts */
+.heart {
+    position: absolute;
+    color: #ff4d6d;
+    animation: floatUp 5s linear infinite;
+    pointer-events: none;
+    user-select: none;
+}
 
-    @keyframes floatUp {
-        0% { transform: translateY(0); opacity: 1; }
-        100% { transform: translateY(-600px); opacity: 0; }
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    50% { transform: translateY(-300px) scale(1.3); }
+    100% { transform: translateY(-600px) scale(1); opacity: 0; }
+}
+
+/* Continuous background hearts */
+.background-heart {
+    position: absolute;
+    color: rgba(255,0,50,0.3);
+    font-size: 20px;
+    animation: floatUp 7s linear infinite;
+}
+
+/* Mobile optimization */
+@media (max-width: 400px) {
+    .heart, .background-heart {
+        font-size: 14px;
     }
+}
 </style>
 </head>
 
 <body>
+
+<!-- Background music -->
+<audio id="music" src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" autoplay loop></audio>
+
+<!-- Floating background hearts -->
+<script>
+for (let i = 0; i < 15; i++) {
+    let bgHeart = document.createElement('div');
+    bgHeart.className = 'background-heart';
+    bgHeart.innerHTML = '💕';
+    bgHeart.style.left = Math.random() * 100 + 'vw';
+    bgHeart.style.top = Math.random() * 100 + 'vh';
+    bgHeart.style.fontSize = (10 + Math.random() * 20) + 'px';
+    document.body.appendChild(bgHeart);
+}
+</script>
 
 <div class="card">
     <h1>Prasun, I’m Really Sorry 💔</h1>
@@ -88,43 +135,44 @@
     <button onclick="showSurprise()">Click Me</button>
 
     <div id="finalMessage">
-        Prasun, I will earn your trust back, no matter what it takes ❤️
+        Prasun, I will earn your trust back, no matter what it takes 💕
     </div>
 </div>
 
 <script>
+// Typing effect
 const text = "Prasun, I know I broke your trust... and I understand how deeply that hurts. Even if I didn’t realize it at that moment, I take it seriously now. Your trust means everything to me.";
-
 let i = 0;
-
 function typeEffect() {
     if (i < text.length) {
         document.getElementById("typing").innerHTML += text.charAt(i);
         i++;
-        setTimeout(typeEffect, 40);
+        setTimeout(typeEffect, 35);
     }
 }
+window.onload = typeEffect;
 
+// Click Me surprise
 function showSurprise() {
     document.getElementById("finalMessage").style.display = "block";
 
-    // create floating hearts
+    // Floating hearts
     for (let i = 0; i < 20; i++) {
         let heart = document.createElement("div");
         heart.className = "heart";
-        heart.innerHTML = "❤️";
+        heart.innerHTML = "💕";
         heart.style.left = Math.random() * 100 + "vw";
         heart.style.top = "100%";
-        heart.style.fontSize = (15 + Math.random() * 20) + "px";
+        heart.style.fontSize = (12 + Math.random() * 18) + "px";
         document.body.appendChild(heart);
 
-        setTimeout(() => {
-            heart.remove();
-        }, 3000);
+        setTimeout(() => { heart.remove(); }, 5000);
     }
-}
 
-window.onload = typeEffect;
+    // Play music (in case mobile stopped autoplay)
+    const music = document.getElementById("music");
+    music.play().catch(()=>{});
+}
 </script>
 
 </body>
